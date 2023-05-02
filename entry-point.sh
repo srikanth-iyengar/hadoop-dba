@@ -26,7 +26,7 @@ rm guava-19.0.jar
 mv $HADOOP_HOME/share/hadoop/hdfs/lib/guava-27.0-jre.jar $HIVE_HOME/lib
 mkdir -p /hive/data
 cd /hive/data
-$HIVE_HOME/bin/schematool -initSchema -dbType derby
+$HIVE_HOME/bin/schematool -initSchema -dbType postgres
 
 echo "Start sequence completed"
 cd /

@@ -1,13 +1,26 @@
 version: "3.9"
 
 services:
+  postgresmeta:
+    image: postgres
+    container_name: postgresmeta
+    environment:
+      POSTGRES_PASSWORD: hive
+      POSTGRES_USER: hive
+      POSTGRES_DB: metastore
+      POSTGRES_HOST_AUTH_METHOD: trust
+
   hadoop:
     image: deadcoder11u2/hadoop-pack
     container_name: hadoop
     command: ["bash", "/entry-point.sh"]
+    depends_on:
+      - postgresmeta
     volumes:
       - ./conf/hadoop:/opt/hadoop/etc/hadoop
       - ./conf/hbase:/opt/hbase/conf
       - ./conf/pig:/opt/pig/conf
       - ./conf/hive:/opt/hive/conf
       - ./entry-point.sh:/entry-point.sh
+      - ./data:/programs
+
