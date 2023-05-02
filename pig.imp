@@ -1,0 +1,17 @@
+data = LOAD '/path/to/data/file' USING PigStorage(',');
+DUMP data;
+
+data = LOAD '/path/to/data/file' USING PigStorage(',');
+filtered_data = FILTER data BY $1 >= 18;
+DUMP filtered_data;
+
+
+data = LOAD '/path/to/data/file' USING PigStorage(',');
+grouped_data = GROUP data BY $2;
+counted_data = FOREACH grouped_data GENERATE group, COUNT(data);
+DUMP counted_data;
+
+data1 = LOAD '/path/to/data1/file' USING PigStorage(',');
+data2 = LOAD '/path/to/data2/file' USING PigStorage(',');
+joined_data = JOIN data1 BY $0, data2 BY $0;
+DUMP joined_data;
